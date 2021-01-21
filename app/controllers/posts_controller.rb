@@ -17,8 +17,8 @@ class PostsController < ApplicationController
   end
 
   def new
-    @post = Post.new
-  end
+    @post = Post.new(author_id: params[:author_id])
+  end 
 
   def create
     @post = Post.new(post_params)
@@ -30,15 +30,17 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     @post.update(post_params)
     redirect_to post_path(@post)
-  end
+  end 
 
   def edit
+    
     @post = Post.find(params[:id])
+  
   end
 
   private
 
   def post_params
-    params.require(:post).permit(:title, :description)
-  end
+    params.require(:post).permit(:title, :description, :author_id)
+  end 
 end
